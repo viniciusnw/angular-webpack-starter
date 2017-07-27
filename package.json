@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "server:dev": "webpack-dev-server --progress --profile --watch --content-base dist/"
+        "server:dev": "webpack-dev-server --progress --profile --watch --content-base src/"
     },
     "dependencies": {
         "@angular/animations": "~4.1.2",

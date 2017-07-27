@@ -31,7 +31,6 @@ module.exports = {
             path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'node_modules')
         ],
-
     },
 
     // Module configure
@@ -87,7 +86,7 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: 'raw-loader',
-                exclude: [ path.resolve(__dirname, 'src/index.html') ]
+                exclude: [path.resolve(__dirname, 'src/index.html')]
             },
             {
                 test: /\.(jpg|png|gif)$/,
@@ -114,11 +113,12 @@ module.exports = {
         // Create css file and inject in index.html
         new ExtractTextPlugin('[name].css'),
 
+        // Arquivos comuns
         new CommonsChunkPlugin({
             name: 'polyfills',
             chunks: ['polyfills']
         }),
-        
+
         new ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)@angular/,
             path.resolve(__dirname, 'src')
@@ -126,7 +126,7 @@ module.exports = {
 
         // Copy assest to public folder
         new CopyWebpackPlugin([
-            {   
+            {
                 from: path.resolve(__dirname, 'src/assets'),
                 to: path.resolve(__dirname, 'dist/assets')
             },
@@ -143,21 +143,23 @@ module.exports = {
     // Saida de arquivos
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
+        sourceMapFilename: '[file].map',
+        chunkFilename: '[id].chunk.js',
+        library: 'ac_[name]',
+        libraryTarget: 'var',
     },
 
     // Server-DEV
     devServer: {
         inline: true,
         port: 420
-
         // port: 420,
         // host: 'localhost',
         // historyApiFallback: true,
         // watchOptions: {
         //     ignored: /node_modules/
         // },
-        // setup: function (app) { }
+        // setup: function (app) {}
     }
 }
