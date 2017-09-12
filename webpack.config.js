@@ -17,6 +17,7 @@ module.exports = {
 
     // Mapa de erros!
     devtool: 'source-map',
+    // devtool: 'cheap-module-source-map',
 
     // Entrada de arquivos
     entry: {
@@ -35,11 +36,9 @@ module.exports = {
 
     // Module configure
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.ts$/,
-                use: [
-                    {
+                use: [{
                         loader: '@angularclass/hmr-loader',
                     },
                     {
@@ -125,17 +124,19 @@ module.exports = {
         ),
 
         // Copy assest to public folder
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, 'src/assets'),
-                to: path.resolve(__dirname, 'dist/assets')
-            },
-        ]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'src/assets'),
+            to: path.resolve(__dirname, 'dist/assets')
+        }, ]),
 
         // Uglyfi
         new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false },
-            output: { comments: false },
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: false
+            },
             sourceMap: true
         })
     ],
@@ -153,13 +154,12 @@ module.exports = {
     // Server-DEV
     devServer: {
         inline: true,
-        port: 420
-        // port: 420,
-        // host: 'localhost',
-        // historyApiFallback: true,
-        // watchOptions: {
-        //     ignored: /node_modules/
-        // },
-        // setup: function (app) {}
+        port: 420,
+        host: 'localhost',
+        historyApiFallback: true,
+        watchOptions: {
+            ignored: /node_modules/
+        },
+        setup: function (app) {}
     }
 }
